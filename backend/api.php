@@ -1,7 +1,11 @@
 <?php
+// Allows requests from any domain
 header("Access-Control-Allow-Origin: *");
+// Used to specify which HTTP headers can be used during the actual request
 header("Access-Control-Allow-Headers: *");
+// Definines the methods that the browser is allowed to use when making CORS
 header("Access-Control-Allow-Methods: *");
+// Helps the client (browser) understand how to interpret the data received from the server
 header('Content-Type: application/json');
 
 // Why do we need it ?
@@ -73,8 +77,7 @@ switch($method) {
         ["_id" => new MongoDB\BSON\ObjectId("$id")]
       );
       exit;
-    }
-    
+    }  
 }
 
 ?>
