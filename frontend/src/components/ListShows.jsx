@@ -20,10 +20,14 @@ const ListShows = ({ watched }) => {
     <div className="relative mb-4">
       <div className="flex overflow-x-scroll gap-5">
         {shows
-          .filter((item) => (watched !== 'all' ? item.watchedStatus === watched : true))
+          .filter((item) => (watched !== '' ? item.watchedStatus === watched : true))
           .map((item) => (
-            <div key={item._id['$oid']} className="cursor-pointer w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex-shrink-0" onClick={() => handleOnClick(item._id['$oid'])}>
-              <div className="relative h-full rounded-lg overflow-hidden shadow-xl">
+            <div 
+              key={item._id['$oid']} 
+              className="cursor-pointer w-44 flex-shrink-0" 
+              onClick={() => handleOnClick(item._id['$oid'])}
+            >
+              <div className="relative h-full rounded-lg overflow-hidden">
                 <img className="object-cover w-full h-full rounded-lg" src={item.posterURL} alt="" />
               </div>
             </div>

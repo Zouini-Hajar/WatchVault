@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import Movies from "./pages/Movies";
 import TvShows from "./pages/TvShows";
 import Details from "./pages/Details";
+import Genres from "./pages/Genres";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="movies" element={<Movies />} />
           <Route path="shows" element={<TvShows />} />
           <Route path="details/:type/:id" element={<Details />} />
+          <Route path="genres/:genre" element={<Genres />} />
         </Route>
       </Routes>
     </div>

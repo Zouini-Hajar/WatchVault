@@ -2,14 +2,14 @@ import axios from 'axios';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const DeleteModal = ({ toggleModal, type, id }) => {
+const DeleteModal = ({ toggleModal, item, id }) => {
   const navigate = useNavigate();
 
   const onDelete = async () => {
-    const option = type === 'movie' ? 'deleteMovie' : 'deleteShow';
-    await axios.delete('http://localhost:8888/project/backend/api.php?type=' + option + '&id=' + id)
+    const requestType = item === 'movie' ? 'deleteMovie' : 'deleteShow';
+    await axios.delete('http://localhost:8888/project/backend/api.php?type=' + requestType + '&id=' + id)
       .then(response => console.log(response.data))
-      .catch(error => console.error('Error deleting movie'));
+      .catch(error => console.error('Error deleting data'));
     navigate(-1);
   }
 
@@ -61,7 +61,7 @@ const DeleteModal = ({ toggleModal, type, id }) => {
               />
             </svg>
             <h3 className="mb-5 text-lg font-normal text-gray-400">
-              Are you sure you want to delete this {type}?
+              Are you sure you want to delete this {item}?
             </h3>
             <button
               data-modal-hide="popup-modal"

@@ -5,10 +5,10 @@ import ListShows from '../components/ListShows';
 const Dashboard = () => {
   return (
     <div className="p-4">
-      <h5 className="text-xl font-bold text-gray-800 mb-3">Movies</h5>
-      <ListMovies watched='all' />
-      <h5 className="text-xl font-bold text-gray-800 my-3">TV Shows</h5>
-      <ListShows watched='all' />
+      <h5 className="text-lg font-bold text-gray-800 mb-3">Movies</h5>
+      <ListMovies watched='' />
+      <h5 className="text-lg font-bold text-gray-800 my-3">TV Shows</h5>
+      <ListShows watched='' />
     </div>
   );
 }

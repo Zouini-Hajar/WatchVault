@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Rating from '../components/Rating';
 import MovieModal from '../components/MovieModal';
 import { IoArrowBack } from 'react-icons/io5';
+import { FaEdit } from "react-icons/fa";
 import { MdDelete } from 'react-icons/md';
 import DeleteModal from '../components/DeleteModal';
 import TvShowModal from '../components/TvShowModal';
@@ -25,8 +26,8 @@ const Details = () => {
   };
 
   useEffect(() => {
-    const option = type === 'movie' ? 'getMovie' : 'getShow';
-    axios.get("http://localhost:8888/project/backend/api.php?type=" + option + "&id=" + id)
+    const requestType = type === 'movie' ? 'getMovie' : 'getShow';
+    axios.get("http://localhost:8888/project/backend/api.php?type=" + requestType + "&id=" + id)
       .then(response => setItem(response.data))
       .catch(error => console.error('Error fetching data'))
   }, []);
@@ -34,25 +35,20 @@ const Details = () => {
   return (
     <div className='p-4'>
       <div className='flex justify-between items-center pb-4'>
-        <button 
-          className='text-xl text-gray-800'
-          onClick={() => navigate(-1)}
-        >
-          <IoArrowBack />
-        </button>
+        <button className='text-xl text-gray-800' onClick={() => navigate(-1)}><IoArrowBack /></button>
         <div className='flex justify-between items-center gap-2'>
-          <button onClick={toggleUpdateModal}>Edit</button>
-          <button className='text-lg' onClick={toggleDeleteModal}><MdDelete /></button>
+          <button className='text-gray-800' onClick={toggleUpdateModal}><FaEdit /></button>
+          <button className='text-lg text-gray-800' onClick={toggleDeleteModal}><MdDelete /></button>
         </div>
       </div>
-      { update && ( type === 'movie' ?
-          <MovieModal toggleModal={toggleUpdateModal} movie={item} type='update' /> :
-          <TvShowModal toggleModal={toggleUpdateModal} show={item} type='update' />)
-      }
-      {remove && <DeleteModal toggleModal={toggleDeleteModal} type={type} id={item[0]?._id['$oid']} />}
+      {update && ( type === 'movie' ?
+        <MovieModal toggleModal={toggleUpdateModal} movie={item} type='update' /> :
+        <TvShowModal toggleModal={toggleUpdateModal} show={item} type='update' />
+      )}
+      {remove && <DeleteModal toggleModal={toggleDeleteModal} item={type} id={id} />}
       <div className='flex'>
         <div className='w-1/3'>
-          <img src={item[0]?.posterURL} alt="" className='rounded-lg shadow-xl' />
+          <img src={item[0]?.posterURL} alt="Poster" className='rounded-lg shadow-xl' />
           { type === 'movie'?
             <p className='my-2 mx-1 text-gray-600'>{item[0]?.duration} minutes</p> :
             <>
